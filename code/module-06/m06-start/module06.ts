@@ -5,11 +5,11 @@
     Rewrite the DataStore class so the array can store items of any type.
 
     TODO: Add and apply a type variable. */
-class DataStore {
+class DataStore<T> {
 
-    private _data = new Array(10);
+    private _data: Array<T> = new Array(10);
     
-    AddOrUpdate(index: number, item: string) {
+    AddOrUpdate(index: number, item: T) {
         if(index >=0 && index <10) {
             this._data[index] = item;
         } else {
@@ -36,5 +36,22 @@ console.log(cities.GetData(12));        // returns 'undefined'
 
 // TODO Test items as numbers.
 
+let empIDS = new DataStore<number>()
+empIDS.AddOrUpdate(0, 50)
+empIDS.AddOrUpdate(1, 65)
+empIDS.AddOrUpdate(2, 89)
+console.log(empIDS.GetData(0));
 
 // TODO Test items as objects.
+
+type Pets = {
+    name: string
+    breed: string
+    age: number
+}
+
+let pets = new DataStore<Pets>()
+
+pets.AddOrUpdate(0, {name:'Rex', breed: 'Golden Retriever', age: 5})
+pets.AddOrUpdate(1, {name:'Sparky', breed: 'Jack Russel Terrier', age: 3})
+console.log(pets.GetData(1));
